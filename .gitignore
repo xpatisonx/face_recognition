@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+.pycache_tmp/
+.idea/
+.mplconfig/
+.DS_Store
+*.pyc
+snapshot.jpg
+calibration_settings.json

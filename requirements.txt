@@ -1,0 +1,5 @@
+mediapipe==0.10.14
+opencv-contrib-python==4.11.0.86
+numpy==1.26.4
+pyobjc-core==11.1; platform_system == "Darwin"
+pyobjc-framework-Quartz==11.1; platform_system == "Darwin"
