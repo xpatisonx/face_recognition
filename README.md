@@ -49,7 +49,7 @@ The project is designed to stay simple, practical, and easy to move between mach
 - `calibration_store.py` - save/load calibration settings
 - `run.sh` - local launcher
 - `run_in_terminal.sh` - macOS launcher via `Terminal.app`
-- `run_windows.ps1` - Windows PowerShell launcher
+- `run_windows.bat` - Windows launcher
 
 ## Requirements
 
@@ -103,7 +103,7 @@ Recommended clean setup on another Windows machine:
 
 1. Install Python `3.9.x` from [python.org](https://www.python.org/downloads/windows/).
 2. During installation, enable `Add python.exe to PATH`.
-3. Open `PowerShell`.
+3. Open `cmd` or `PowerShell`.
 4. Clone the repo:
 
 ```powershell
@@ -117,32 +117,34 @@ cd face_recognition
 py -3.9 -m venv .venv
 ```
 
-6. If PowerShell blocks activation, allow local scripts for the current user:
+6. Activate the environment if you want to work inside it manually:
 
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
-
-7. Activate the environment:
+PowerShell:
 
 ```powershell
 .venv\Scripts\Activate.ps1
 ```
 
-8. Install dependencies:
+Command Prompt:
+
+```bat
+.venv\Scripts\activate.bat
+```
+
+7. Install dependencies:
 
 ```powershell
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-9. Run the app:
+8. Run the app:
 
-```powershell
-.\run_windows.ps1
+```bat
+run_windows.bat
 ```
 
-10. On first launch:
+9. On first launch:
 
 - allow camera access if Windows asks,
 - perform calibration if `calibration_settings.json` does not exist,
@@ -222,10 +224,10 @@ macOS fallback through `Terminal.app`:
 
 The `run_in_terminal.sh` launcher is useful on macOS when camera permission is granted to `Terminal.app`.
 
-Windows PowerShell:
+Windows:
 
-```powershell
-.\run_windows.ps1
+```bat
+run_windows.bat
 ```
 
 ## Controls
@@ -318,20 +320,12 @@ Use this checklist when moving the project to another Windows machine:
 4. Virtual environment created.
 5. Dependencies installed from `requirements.txt`.
 6. Camera permission granted.
-7. App starts with `.\run_windows.ps1`.
+7. App starts with `run_windows.bat`.
 8. New local calibration performed on that machine.
 9. Cursor control tested with `c`.
 10. Scroll tested after full calibration including `tilt_left` and `tilt_right`.
 
 ## Troubleshooting
-
-### PowerShell says scripts are disabled
-
-Run:
-
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-```
 
 ### `py -3.9` is not found
 
