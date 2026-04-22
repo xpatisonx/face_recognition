@@ -49,6 +49,7 @@ The project is designed to stay simple, practical, and easy to move between mach
 - `calibration_store.py` - save/load calibration settings
 - `run.sh` - local launcher
 - `run_in_terminal.sh` - macOS launcher via `Terminal.app`
+- `run_windows.ps1` - Windows PowerShell launcher
 
 ## Requirements
 
@@ -96,6 +97,57 @@ Windows PowerShell:
 pip install -r requirements.txt
 ```
 
+## Windows 11 Quick Start
+
+Recommended clean setup on another Windows machine:
+
+1. Install Python `3.9.x` from [python.org](https://www.python.org/downloads/windows/).
+2. During installation, enable `Add python.exe to PATH`.
+3. Open `PowerShell`.
+4. Clone the repo:
+
+```powershell
+git clone https://github.com/xpatisonx/face_recognition.git
+cd face_recognition
+```
+
+5. Create the virtual environment:
+
+```powershell
+py -3.9 -m venv .venv
+```
+
+6. If PowerShell blocks activation, allow local scripts for the current user:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+7. Activate the environment:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+8. Install dependencies:
+
+```powershell
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+9. Run the app:
+
+```powershell
+.\run_windows.ps1
+```
+
+10. On first launch:
+
+- allow camera access if Windows asks,
+- perform calibration if `calibration_settings.json` does not exist,
+- enable cursor control with `c` only after calibration.
+
 ## Configuration
 
 The project keeps runtime configuration intentionally small.
@@ -119,6 +171,12 @@ If the file exists:
 
 - the app loads it on startup,
 - the app starts as already calibrated.
+
+Important:
+
+- do not copy `calibration_settings.json` between different users or computers,
+- create calibration separately on each machine,
+- if behavior feels wrong after moving machines, press `r` and recalibrate.
 
 ### Overlay Mode
 
@@ -163,6 +221,12 @@ macOS fallback through `Terminal.app`:
 ```
 
 The `run_in_terminal.sh` launcher is useful on macOS when camera permission is granted to `Terminal.app`.
+
+Windows PowerShell:
+
+```powershell
+.\run_windows.ps1
+```
 
 ## Controls
 
@@ -229,6 +293,63 @@ tccutil reset Camera
 ```
 
 Then reopen the terminal app and run again.
+
+### Windows 11
+
+You may need to allow:
+
+- Camera access
+- Accessibility / input-control style permissions depending on system prompts
+
+Useful places to check:
+
+- `Settings > Privacy & security > Camera`
+- `Settings > Privacy & security > App permissions`
+
+If webcam preview works but cursor control does not, restart the app after granting permission.
+
+## Windows Setup Checklist
+
+Use this checklist when moving the project to another Windows machine:
+
+1. Python `3.9` installed.
+2. `git` installed.
+3. Repository cloned.
+4. Virtual environment created.
+5. Dependencies installed from `requirements.txt`.
+6. Camera permission granted.
+7. App starts with `.\run_windows.ps1`.
+8. New local calibration performed on that machine.
+9. Cursor control tested with `c`.
+10. Scroll tested after full calibration including `tilt_left` and `tilt_right`.
+
+## Troubleshooting
+
+### PowerShell says scripts are disabled
+
+Run:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+### `py -3.9` is not found
+
+Either:
+
+- install Python 3.9, or
+- use the exact installed launcher, for example `python -m venv .venv` if `python` already points to 3.9.
+
+### Camera opens but movement feels wrong
+
+Delete local calibration and recalibrate:
+
+- press `r` in the app, or
+- delete `calibration_settings.json`
+
+### Cursor works but scroll feels too sensitive
+
+Re-run the full calibration and make sure `tilt_left` and `tilt_right` are exaggerated enough to represent intentional scroll gestures.
 
 ## Portability Notes
 
